@@ -21,7 +21,7 @@ ROUTES = ("policy", "data", "hybrid")
 DATA_TERMS = {
     "revenue", "sale", "sold", "top", "best", "selling", "unit", "how many", "total", "trend",
     "month", "by store", "by category", "below reorder", "low stock", "running low", "on hand",
-    "compare", "which store", "which product", "inventory level", "stock level", "q1",
+    "compare", "which store", "which product", "which category", "inventory level", "stock level", "q1",
 }
 POLICY_TERMS = {
     "policy", "return", "refund", "receipt", "price match", "price adjustment", "reward", "allowed",

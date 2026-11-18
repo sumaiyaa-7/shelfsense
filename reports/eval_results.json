@@ -1,62 +1,62 @@
 {
   "retrieval_ab": {
-    "n": 18,
+    "n": 33,
     "summary": {
       "bm25": {
         "mrr": [
-          0.9166666666666666,
-          0.7777777777777778,
-          1.0
+          0.8686868686868687,
+          0.7626262626262625,
+          0.9595959595959597
         ],
         "hit@1": [
-          0.8888888888888888,
-          0.7222222222222222,
-          1.0
+          0.8181818181818182,
+          0.6666666666666666,
+          0.9393939393939394
         ],
         "hit@4": [
-          0.9444444444444444,
-          0.8333333333333334,
+          0.9393939393939394,
+          0.8484848484848485,
           1.0
         ]
       },
       "vector": {
         "mrr": [
-          0.8611111111111112,
-          0.7222222222222222,
-          0.9722222222222222
+          0.8383838383838383,
+          0.7323232323232323,
+          0.9343434343434344
         ],
         "hit@1": [
-          0.7777777777777778,
-          0.5555555555555556,
-          0.9444444444444444
+          0.7575757575757576,
+          0.6060606060606061,
+          0.9090909090909091
         ],
         "hit@4": [
-          0.9444444444444444,
-          0.8333333333333334,
+          0.9393939393939394,
+          0.8484848484848485,
           1.0
         ]
       },
       "hybrid": {
         "mrr": [
-          0.9166666666666666,
-          0.7777777777777778,
-          1.0
+          0.8686868686868687,
+          0.7626262626262625,
+          0.9595959595959597
         ],
         "hit@1": [
-          0.8888888888888888,
-          0.7222222222222222,
-          1.0
+          0.8181818181818182,
+          0.6666666666666666,
+          0.9393939393939394
         ],
         "hit@4": [
-          0.9444444444444444,
-          0.8333333333333334,
+          0.9393939393939394,
+          0.8484848484848485,
           1.0
         ]
       }
     },
     "p_values_mrr": {
       "hybrid_vs_bm25": 1.0,
-      "hybrid_vs_vector": 0.49445055494450557
+      "hybrid_vs_vector": 0.48855114488551143
     },
     "per_question": {
       "bm25": {
@@ -78,7 +78,22 @@
           1.0,
           0.0,
           1.0,
-          0.5
+          0.5,
+          1.0,
+          1.0,
+          1.0,
+          0.3333333333333333,
+          1.0,
+          0.3333333333333333,
+          1.0,
+          0.5,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
         ],
         "hit@1": [
           1.0,
@@ -98,7 +113,22 @@
           1.0,
           0.0,
           1.0,
-          0.0
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
         ],
         "hit@4": [
           1.0,
@@ -118,6 +148,21 @@
           1.0,
           0.0,
           1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
           1.0
         ]
       },
@@ -140,7 +185,22 @@
           1.0,
           0.0,
           1.0,
-          0.5
+          0.5,
+          1.0,
+          1.0,
+          1.0,
+          0.3333333333333333,
+          1.0,
+          0.3333333333333333,
+          1.0,
+          0.5,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
         ],
         "hit@1": [
           1.0,
@@ -160,7 +220,22 @@
           1.0,
           0.0,
           1.0,
-          0.0
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
         ],
         "hit@4": [
           1.0,
@@ -180,6 +255,21 @@
           1.0,
           0.0,
           1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
           1.0
         ]
       },
@@ -202,7 +292,22 @@
           1.0,
           0.0,
           1.0,
-          0.5
+          0.5,
+          1.0,
+          1.0,
+          1.0,
+          0.3333333333333333,
+          1.0,
+          0.3333333333333333,
+          1.0,
+          0.5,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
         ],
         "hit@1": [
           1.0,
@@ -222,7 +327,22 @@
           1.0,
           0.0,
           1.0,
-          0.0
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
         ],
         "hit@4": [
           1.0,
@@ -242,6 +362,21 @@
           1.0,
           0.0,
           1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
           1.0
         ]
       }
@@ -256,7 +391,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 1.08,
+        "latency_ms": 1.07,
         "tokens": 0
       },
       {
@@ -266,7 +401,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 0.98,
+        "latency_ms": 0.95,
         "tokens": 0
       },
       {
@@ -276,7 +411,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 0.81,
+        "latency_ms": 0.82,
         "tokens": 0
       },
       {
@@ -286,7 +421,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 0.79,
+        "latency_ms": 0.81,
         "tokens": 0
       },
       {
@@ -296,7 +431,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 0.84,
+        "latency_ms": 0.8,
         "tokens": 0
       },
       {
@@ -306,7 +441,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 0.82,
+        "latency_ms": 0.84,
         "tokens": 0
       },
       {
@@ -316,7 +451,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 0.81,
+        "latency_ms": 0.76,
         "tokens": 0
       },
       {
@@ -346,7 +481,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 0.8,
+        "latency_ms": 0.84,
         "tokens": 0
       },
       {
@@ -356,7 +491,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 0.84,
+        "latency_ms": 0.79,
         "tokens": 0
       },
       {
@@ -366,7 +501,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 0.79,
+        "latency_ms": 0.82,
         "tokens": 0
       },
       {
@@ -376,7 +511,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 0.87,
+        "latency_ms": 0.82,
         "tokens": 0
       },
       {
@@ -396,7 +531,7 @@
         "route_ok": 1.0,
         "keyword_recall": 1.0,
         "groundedness": 1.0,
-        "latency_ms": 0.84,
+        "latency_ms": 0.83,
         "tokens": 0
       },
       {
@@ -415,7 +550,7 @@
         "route": "data",
         "route_ok": 1.0,
         "sql_exec_match": 1.0,
-        "latency_ms": 1.5,
+        "latency_ms": 1.51,
         "tokens": 0
       },
       {
@@ -424,7 +559,7 @@
         "route": "data",
         "route_ok": 1.0,
         "sql_exec_match": 1.0,
-        "latency_ms": 0.24,
+        "latency_ms": 0.23,
         "tokens": 0
       },
       {
@@ -433,7 +568,7 @@
         "route": "data",
         "route_ok": 1.0,
         "sql_exec_match": 1.0,
-        "latency_ms": 1.29,
+        "latency_ms": 1.24,
         "tokens": 0
       },
       {
@@ -442,7 +577,7 @@
         "route": "data",
         "route_ok": 1.0,
         "sql_exec_match": 1.0,
-        "latency_ms": 0.9,
+        "latency_ms": 0.98,
         "tokens": 0
       },
       {
@@ -451,7 +586,7 @@
         "route": "data",
         "route_ok": 1.0,
         "sql_exec_match": 1.0,
-        "latency_ms": 1.24,
+        "latency_ms": 1.2,
         "tokens": 0
       },
       {
@@ -460,7 +595,7 @@
         "route": "data",
         "route_ok": 1.0,
         "sql_exec_match": 1.0,
-        "latency_ms": 1.23,
+        "latency_ms": 1.26,
         "tokens": 0
       },
       {
@@ -469,7 +604,7 @@
         "route": "data",
         "route_ok": 1.0,
         "sql_exec_match": 1.0,
-        "latency_ms": 2.21,
+        "latency_ms": 2.2,
         "tokens": 0
       },
       {
@@ -489,7 +624,7 @@
         "keyword_recall": 1.0,
         "groundedness": 0.5,
         "sql_exec_match": 1.0,
-        "latency_ms": 1.3,
+        "latency_ms": 1.29,
         "tokens": 0
       },
       {
@@ -500,37 +635,242 @@
         "keyword_recall": 1.0,
         "groundedness": 0.6666666666666666,
         "sql_exec_match": 1.0,
-        "latency_ms": 2.02,
+        "latency_ms": 1.96,
+        "tokens": 0
+      },
+      {
+        "id": "p17",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.93,
+        "tokens": 0
+      },
+      {
+        "id": "p18",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.88,
+        "tokens": 0
+      },
+      {
+        "id": "p19",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.96,
+        "tokens": 0
+      },
+      {
+        "id": "p20",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 0.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.8,
+        "tokens": 0
+      },
+      {
+        "id": "p21",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.84,
+        "tokens": 0
+      },
+      {
+        "id": "p22",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 0.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.76,
+        "tokens": 0
+      },
+      {
+        "id": "p23",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.82,
+        "tokens": 0
+      },
+      {
+        "id": "p24",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.79,
+        "tokens": 0
+      },
+      {
+        "id": "p25",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.86,
+        "tokens": 0
+      },
+      {
+        "id": "p26",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.82,
+        "tokens": 0
+      },
+      {
+        "id": "p27",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.8,
+        "tokens": 0
+      },
+      {
+        "id": "p28",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.83,
+        "tokens": 0
+      },
+      {
+        "id": "p29",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.8,
+        "tokens": 0
+      },
+      {
+        "id": "p30",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 0.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.85,
+        "tokens": 0
+      },
+      {
+        "id": "d09",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 1.25,
+        "tokens": 0
+      },
+      {
+        "id": "d10",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 0.96,
+        "tokens": 0
+      },
+      {
+        "id": "d11",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 1.32,
+        "tokens": 0
+      },
+      {
+        "id": "d12",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 1.21,
+        "tokens": 0
+      },
+      {
+        "id": "d13",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 1.03,
+        "tokens": 0
+      },
+      {
+        "id": "d14",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 0.18,
+        "tokens": 0
+      },
+      {
+        "id": "h03",
+        "expected_route": "hybrid",
+        "route": "hybrid",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 0.6666666666666666,
+        "sql_exec_match": 1.0,
+        "latency_ms": 2.12,
         "tokens": 0
       }
     ],
     "metrics": {
       "route_ok": {
-        "n": 26,
+        "n": 47,
         "ci": [
-          0.9615384615384616,
-          0.8846153846153846,
+          0.9787234042553191,
+          0.9361702127659575,
           1.0
         ]
       },
       "keyword_recall": {
-        "n": 18,
+        "n": 33,
         "ci": [
-          0.8888888888888888,
-          0.7222222222222222,
-          1.0
+          0.8484848484848485,
+          0.7272727272727273,
+          0.9696969696969697
         ]
       },
       "groundedness": {
-        "n": 18,
+        "n": 33,
         "ci": [
-          0.8981481481481483,
-          0.7592592592592592,
-          1.0
+          0.9343434343434343,
+          0.8585858585858586,
+          0.9898989898989898
         ]
       },
       "sql_exec_match": {
-        "n": 10,
+        "n": 17,
         "ci": [
           1.0,
           1.0,
@@ -539,8 +879,8 @@
       }
     },
     "latency_ms": {
-      "p50": 0.855,
-      "p95": 2.1625
+      "p50": 0.84,
+      "p95": 2.071999999999999
     },
     "failures": [
       {
@@ -561,6 +901,36 @@
         "keyword_recall": 0.0,
         "groundedness": 1.0,
         "latency_ms": 0.81,
+        "tokens": 0
+      },
+      {
+        "id": "p20",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 0.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.8,
+        "tokens": 0
+      },
+      {
+        "id": "p22",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 0.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.76,
+        "tokens": 0
+      },
+      {
+        "id": "p30",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 0.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.85,
         "tokens": 0
       }
     ]

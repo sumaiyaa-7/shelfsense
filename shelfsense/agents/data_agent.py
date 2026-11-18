@@ -97,7 +97,7 @@ class DataAgent:
         joins = "FROM sales x JOIN products p ON p.product_id = x.product_id JOIN stores s ON s.store_id = x.store_id"
         w = f"WHERE {' AND '.join(where)}" if where else ""
 
-        if re.search(r"reorder|low stock|running low|restock", q):
+        if re.search(r"reorder|low stock|running low|\brestock\b", q):  # not "restocking fee"
             city_where = [c for c in where if c.startswith("s.city")]
             city_params = [p for p, c in zip(params, where) if c.startswith("s.city")]
             cw = " AND " + " AND ".join(city_where) if city_where else ""
@@ -115,11 +115,11 @@ class DataAgent:
             return (f"SELECT p.name, {metric} AS {alias} {joins} {w} GROUP BY p.name ORDER BY {alias} DESC LIMIT {n}", tuple(params))
         if re.search(r"by store|each store|which store|per store", q):
             return (f"SELECT s.city, ROUND(SUM(x.revenue), 2) AS revenue {joins} {w} GROUP BY s.city ORDER BY revenue DESC", tuple(params))
-        if re.search(r"by category|each category|per category", q):
+        if re.search(r"by category|each category|per category|which category", q):
             return (f"SELECT p.category, ROUND(SUM(x.revenue), 2) AS revenue {joins} {w} GROUP BY p.category ORDER BY revenue DESC", tuple(params))
         if re.search(r"by month|monthly|trend|each month", q):
             return (f"SELECT substr(x.sale_date, 1, 7) AS month, ROUND(SUM(x.revenue), 2) AS revenue {joins} {w} GROUP BY month ORDER BY month", tuple(params))
-        if re.search(r"total|revenue|sales", q):
+        if re.search(r"total|revenue|sales|\bsell\b|\bsold\b|how many|how much", q):
             return (f"SELECT ROUND(SUM(x.revenue), 2) AS total_revenue, SUM(x.quantity) AS units {joins} {w}", tuple(params))
         return None
 

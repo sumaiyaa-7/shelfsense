@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShelfSense · Retail Ops AI Copilot</title>
+<style>
+  :root {
+    --bg: #f6f5f1; --panel: #ffffff; --ink: #1d2433; --muted: #6b7280; --line: #e5e2da;
+    --accent: #1f3a93; --accent-soft: #e8ecf8; --policy: #0f766e; --policy-soft: #e3f4f1;
+    --data: #9a4d00; --data-soft: #fbefe2; --user: #1f3a93;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 28px 18px 140px; }
+  header h1 { margin: 0; font-size: 26px; letter-spacing: -0.02em; }
+  header h1 span { color: var(--accent); }
+  header p { margin: 6px 0 0; color: var(--muted); }
+  .note { margin-top: 14px; padding: 10px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; font-size: 13.5px; color: var(--muted); }
+  .note a { color: var(--accent); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 8px; }
+  .chip { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 7px 13px; font: inherit; font-size: 13.5px; cursor: pointer; color: var(--ink); }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .chip b { font-weight: 600; margin-right: 4px; }
+  #log { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
+  .msg { border-radius: 14px; padding: 14px 16px; max-width: 100%; }
+  .user { align-self: flex-end; background: var(--user); color: #fff; max-width: 80%; }
+  .bot { background: var(--panel); border: 1px solid var(--line); }
+  .meta { display: flex; gap: 8px; align-items: center; font-size: 12.5px; color: var(--muted); margin-bottom: 8px; flex-wrap: wrap; }
+  .badge { font-weight: 600; padding: 2px 9px; border-radius: 999px; font-size: 12px; }
+  .policy { background: var(--policy-soft); color: var(--policy); }
+  .data { background: var(--data-soft); color: var(--data); }
+  .hybrid { background: var(--accent-soft); color: var(--accent); }
+  .answer p { margin: 0 0 8px; }
+  .answer sup { color: var(--accent); font-weight: 600; }
+  table { border-collapse: collapse; margin: 6px 0 4px; font-size: 13.5px; width: 100%; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: .03em; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .sources { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 13px; color: var(--muted); }
+  details { margin-top: 10px; font-size: 13px; }
+  summary { cursor: pointer; color: var(--accent); }
+  pre { white-space: pre-wrap; word-break: break-word; background: #0f172a; color: #e2e8f0; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; }
+  .typing { color: var(--muted); font-style: italic; }
+  form { position: fixed; left: 0; right: 0; bottom: 0; background: linear-gradient(transparent, var(--bg) 30%); padding: 26px 18px 18px; }
+  .bar { max-width: 860px; margin: 0 auto; display: flex; gap: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 6px; box-shadow: 0 6px 24px rgba(0,0,0,.06); }
+  input { flex: 1; border: 0; outline: 0; font: inherit; padding: 10px 12px; background: transparent; color: var(--ink); }
+  button.send { border: 0; background: var(--accent); color: #fff; font: inherit; font-weight: 600; padding: 0 18px; border-radius: 10px; cursor: pointer; }
+  button.send:disabled { opacity: .5; cursor: default; }
+  footer { margin-top: 26px; font-size: 12.5px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Shelf<span>Sense</span></h1>
+    <p>A multi-agent AI copilot for retail store teams. Ask about store policies, sales, or inventory.</p>
+    <div class="note">
+      A router sends each question to a <b>policy agent</b> (searches store policy documents and cites sources) or a
+      <b>data agent</b> (writes a safe, read-only SQL query against sales and inventory data), or to both.
+      This demo uses <b>synthetic data</b> for a fictional retailer and runs in offline mode.
+      <a href="https://github.com/sumaiyaa-7/shelfsense" target="_blank" rel="noopener">See the code on GitHub</a>.
+    </div>
+  </header>
+
+  <div class="chips" id="chips"></div>
+  <div id="log"></div>
+
+  <footer>Built by Sumaiya Amatul Muhaimeen · Python · RAG · text-to-SQL · FastAPI · Docker</footer>
+</div>
+
+<form id="form" autocomplete="off">
+  <div class="bar">
+    <input id="q" placeholder="Ask a question, e.g. Which products are low on stock in Boston?" maxlength="500">
+    <button class="send" id="send" type="submit">Ask</button>
+  </div>
+</form>
+
+<script>
+const EXAMPLES = [
+  ["Policy", "Can a customer return an opened printer?"],
+  ["Policy", "What happens if my drawer is short by 8 dollars?"],
+  ["Policy", "How long do rewards last before they expire?"],
+  ["Data", "What are the top 3 products by revenue in Edison?"],
+  ["Data", "Which products are below reorder point in Boston?"],
+  ["Data", "Show revenue by store in March"],
+  ["Both", "Which Boston products are running low and what is the rule for when the reorder is submitted?"],
+];
+const ROUTE_LABEL = { policy: "Policy agent", data: "Data agent", hybrid: "Policy + Data agents" };
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+// Turn the API's small markdown subset (paragraphs, **bold**, [n] citations, pipe tables) into HTML.
+function render(md) {
+  const lines = md.split("\n");
+  let html = "", para = [], i = 0;
+  const inline = (t) => esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\[(\d+)\]/g, "<sup>[$1]</sup>");
+  const flush = () => { if (para.length) { html += "<p>" + inline(para.join(" ")) + "</p>"; para = []; } };
+  while (i < lines.length) {
+    const line = lines[i].trim();
+    if (line.startsWith("|")) {
+      flush();
+      const rows = [];
+      while (i < lines.length && lines[i].trim().startsWith("|")) { rows.push(lines[i].trim()); i++; }
+      const cells = (r) => r.replace(/^\||\|$/g, "").split("|").map((c) => c.trim());
+      const head = cells(rows[0]);
+      const body = rows.slice(2).map(cells);
+      const isNum = (v) => /^-?[\d,]+(\.\d+)?$/.test(v);
+      const numCol = head.map((_, j) => body.length > 0 && body.every((r) => isNum(r[j] || "")));
+      html += "<table><thead><tr>" + head.map((h, j) => `<th class="${numCol[j] ? "num" : ""}">${esc(h.replace(/_/g, " "))}</th>`).join("") + "</tr></thead><tbody>" +
+        body.map((r) => "<tr>" + r.map((c) => `<td class="${isNum(c) ? "num" : ""}">${esc(c)}</td>`).join("") + "</tr>").join("") +
+        "</tbody></table>";
+      continue;
+    }
+    if (line === "") flush(); else para.push(line);
+    i++;
+  }
+  flush();
+  return html;
+}
+
+function addMsg(cls, html) {
+  const div = document.createElement("div");
+  div.className = "msg " + cls;
+  div.innerHTML = html;
+  $("log").appendChild(div);
+  div.scrollIntoView({ behavior: "smooth", block: "end" });
+  return div;
+}
+
+async function ask(question) {
+  question = question.trim();
+  if (!question) return;
+  $("q").value = "";
+  $("send").disabled = true;
+  addMsg("user", esc(question));
+  const pending = addMsg("bot", '<span class="typing">Thinking…</span>');
+  const slow = setTimeout(() => {
+    pending.innerHTML = '<span class="typing">Waking up the server… free hosting sleeps when idle, so the first question can take up to a minute.</span>';
+  }, 4000);
+  try {
+    const res = await fetch("/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question }) });
+    if (!res.ok) throw new Error("Server returned " + res.status);
+    const r = await res.json();
+    const [answer, sources] = r.answer.split("\n\nSources: ");
+    let html = `<div class="meta"><span class="badge ${r.route}">${ROUTE_LABEL[r.route] || r.route}</span>` +
+               `<span>${Math.round(r.latency_ms)} ms</span><span>· trace ${esc(r.trace_id)}</span></div>`;
+    html += `<div class="answer">${render(answer)}</div>`;
+    if (sources) html += `<div class="sources">Sources: ${esc(sources)}</div>`;
+    if (r.sql) html += `<details><summary>Show the SQL query the data agent ran</summary><pre>${esc(r.sql)}</pre></details>`;
+    pending.innerHTML = html;
+  } catch (err) {
+    pending.innerHTML = `<span class="typing">Something went wrong (${esc(err.message)}). Please try again.</span>`;
+  } finally {
+    clearTimeout(slow);
+    $("send").disabled = false;
+    $("q").focus();
+  }
+}
+
+EXAMPLES.forEach(([tag, q]) => {
+  const b = document.createElement("button");
+  b.className = "chip"; b.type = "button";
+  b.innerHTML = `<b>${tag}</b>${esc(q)}`;
+  b.onclick = () => ask(q);
+  $("chips").appendChild(b);
+});
+$("form").addEventListener("submit", (e) => { e.preventDefault(); ask($("q").value); });
+</script>
+</body>
+</html>

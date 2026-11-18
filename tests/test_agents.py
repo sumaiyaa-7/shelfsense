@@ -42,3 +42,13 @@ def test_bootstrap_ci_contains_mean():
 def test_permutation_test():
     assert paired_permutation_test([1] * 20, [0] * 20) < 0.01
     assert paired_permutation_test([1, 0, 1, 0], [1, 0, 1, 0]) == 1.0
+
+
+def test_regressions_found_by_evals(copilot):
+    # "restocking fee" must not trigger the low-stock query
+    r = copilot.ask("What were Edison's top 3 products by revenue and what is the restocking fee on opened printers?")
+    assert r.route == "hybrid" and "SUM(x.revenue)" in r.sql and "reorder_point" not in r.sql
+    # "sell" (not just "sales") should map to a totals query
+    assert copilot.ask("How many units of furniture did Boston sell in March?").sql is not None
+    # "which category" is a data question
+    assert copilot.ask("Which category brings in the most money in Edison?").route == "data"

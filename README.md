@@ -48,7 +48,7 @@ flowchart LR
 | Retriever | BM25 (written from scratch), dense vectors (LSA offline, or OpenAI embeddings), and hybrid Reciprocal Rank Fusion. | `retrieval/` |
 | LLM client | Provider-agnostic HTTP clients with no vendor SDK, with exponential backoff on 429 and 5xx errors and token accounting. | `llm.py` |
 | Observability | A span tree per request (router, agent, retrieval, LLM, SQL) recording latency, tokens, SQL, and retrieved IDs, exported to JSONL and exposed at `/traces/{id}`. | `observability/tracing.py` |
-| Evals | A golden set of 26 questions, a retrieval A/B test, bootstrap CIs, a paired permutation test, and a CI quality gate. | `evals/` |
+| Evals | A golden set of 47 questions, a retrieval A/B test, bootstrap CIs, a paired permutation test, and a CI quality gate. | `evals/` |
 
 ## Quickstart
 
@@ -62,7 +62,7 @@ python -m shelfsense.seed_db                 # builds data/retail.db (reproducib
 python -m shelfsense.cli "Can a customer return an opened printer?"
 python -m shelfsense.cli                     # interactive mode
 uvicorn shelfsense.api:app --reload          # REST API, docs at http://localhost:8000/docs
-pytest -q                                    # 24 tests
+python -m pytest -q                          # 25 tests
 python -m shelfsense.evals.run_evals         # writes reports/
 ```
 
@@ -83,20 +83,30 @@ Results in offline mode (`reports/eval_report.md`):
 
 | Metric | n | Mean [95% CI] |
 |---|---|---|
-| Routing accuracy | 26 | 0.96 [0.88, 1.00] |
-| SQL execution accuracy (result set equals the reference query's) | 10 | 1.00 [1.00, 1.00] |
-| Answer keyword recall (required facts present) | 18 | 0.89 [0.72, 1.00] |
-| Groundedness (answer sentences supported by the retrieved context) | 18 | 0.90 [0.76, 1.00] |
+| Routing accuracy | 47 | 0.98 [0.94, 1.00] |
+| SQL execution accuracy (result set equals the reference query's) | 17 | 1.00 [1.00, 1.00] |
+| Answer keyword recall (required facts present) | 33 | 0.85 [0.73, 0.97] |
+| Groundedness (answer sentences supported by the retrieved context) | 33 | 0.93 [0.86, 0.99] |
 
 ![Retrieval A/B test](reports/retrieval_ab.png)
 
-**What the A/B test says:** hybrid retrieval matched BM25 (MRR 0.92) and beat pure vector search on hit@1 (0.89 vs 0.78). However, the difference is **not statistically significant** (p = 0.49, n = 18). The honest conclusion is "hybrid is no worse and is more robust," not "hybrid wins." Telling those two claims apart takes a larger eval set.
+**What the A/B test says:** hybrid retrieval matched BM25 (MRR 0.87) and beat pure vector search on hit@1 (0.82 vs 0.76). However, the difference is **not statistically significant** (p = 0.49, n = 33). The honest conclusion is "hybrid is no worse and is more robust," not "hybrid wins." Telling those two claims apart takes a larger eval set.
 
-**Failure analysis.** The eval caught two real problems:
-- `p08` *"How many cartridges can a member recycle each month?"*: "how many" pushed the rule-based router to the data agent. This is a known weakness of keyword routing, and the LLM router fixes it.
-- `p16` *"Can I give a refund when the customer lost the slip?"*: "slip" never appears in the policy text, so lexical retrieval misses the paraphrase. Semantic embeddings in LLM mode are the fix. This is exactly the case where dense retrieval earns its place.
+**The golden set** has 47 questions written the way store staff actually talk: everyday scenarios ("A customer handed me a 100 dollar bill. Do I need to check it?"), paraphrases ("never came to collect their online order"), and compound questions that need both agents.
 
-**CI quality gate:** GitHub Actions runs the tests and the eval suite on every push. The build fails if the *lower bound* of the CI for routing, SQL accuracy, or keyword recall falls below its threshold, so a regression can't hide inside noise.
+**Bugs the eval caught and I fixed** (each now has a regression test in `tests/test_agents.py`):
+- *"...what is the restocking fee on opened printers?"* triggered the low-stock query because "restocking" contains "restock".
+- *"How many units of furniture did Boston **sell**..."* had no matching query, because only "sales" was recognized.
+- *"Which **category** brings in the most money?"* was routed to the policy agent.
+
+**Known failures, documented rather than hidden.** In offline mode these come from keyword matching, and semantic embeddings plus an LLM (LLM mode) are the fix:
+- `p08` *"How many cartridges can a member recycle each month?"*: "how many" pushes the rule-based router to the data agent.
+- `p16` *"...the customer lost the slip"*: the policy says "receipt," never "slip."
+- `p20` *"...price match 8 boxes of the same paper"*: the answer comes from the right document but misses the 5-unit limit.
+- `p22` *"Does it cost anything to join?"*: the policy says "Membership is free."
+- `p30` *"...writing off 150 dollars of damaged items"*: "150 dollars" matches the cash-drawer float instead of the shrink rules.
+
+**CI quality gate:** GitHub Actions runs the tests and the eval suite on every push. The build fails if mean routing accuracy drops below 0.90, SQL execution accuracy below 0.95, or keyword recall below 0.80.
 
 ## Design decisions
 
@@ -109,9 +119,10 @@ Results in offline mode (`reports/eval_report.md`):
 
 - [ ] LLM-as-judge faithfulness scoring alongside the deterministic groundedness proxy
 - [ ] Swap the in-memory vector index for pgvector or Chroma, and add a reranker
-- [ ] Grow the golden set to 100+ questions so A/B tests have statistical power
+- [ ] Grow the golden set to 100+ questions, with a held-out split so fixes aren't tuned to the test set
 - [ ] Add conversation memory for follow-up questions
 - [ ] Export spans to OpenTelemetry / Grafana
+- [ ] Make the CI gate use the lower bound of the confidence interval instead of the mean
 
 ## Data
 

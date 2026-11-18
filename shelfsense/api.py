@@ -1,12 +1,16 @@
 """REST API (FastAPI).
 
     uvicorn shelfsense.api:app --reload
+    open http://localhost:8000 for the chat page
     curl -X POST localhost:8000/ask -H 'content-type: application/json' \
          -d '{"question": "What are the top 3 products by revenue in Edison?"}'
 """
 from __future__ import annotations
 
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
 from . import __version__
@@ -14,6 +18,7 @@ from .agents.orchestrator import Copilot
 
 app = FastAPI(title="ShelfSense", version=__version__, description="Multi-agent AI copilot for retail operations")
 copilot = Copilot()
+CHAT_PAGE = Path(__file__).with_name("chat.html").read_text()
 
 
 class AskRequest(BaseModel):
@@ -32,6 +37,12 @@ class AskResponse(BaseModel):
     trace_id: str
     latency_ms: float
     total_tokens: int
+
+
+@app.get("/", response_class=HTMLResponse, include_in_schema=False)
+def chat_page() -> str:
+    """Browser chat UI for trying the copilot."""
+    return CHAT_PAGE
 
 
 @app.get("/health")
