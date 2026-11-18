@@ -1,0 +1,568 @@
+{
+  "retrieval_ab": {
+    "n": 18,
+    "summary": {
+      "bm25": {
+        "mrr": [
+          0.9166666666666666,
+          0.7777777777777778,
+          1.0
+        ],
+        "hit@1": [
+          0.8888888888888888,
+          0.7222222222222222,
+          1.0
+        ],
+        "hit@4": [
+          0.9444444444444444,
+          0.8333333333333334,
+          1.0
+        ]
+      },
+      "vector": {
+        "mrr": [
+          0.8611111111111112,
+          0.7222222222222222,
+          0.9722222222222222
+        ],
+        "hit@1": [
+          0.7777777777777778,
+          0.5555555555555556,
+          0.9444444444444444
+        ],
+        "hit@4": [
+          0.9444444444444444,
+          0.8333333333333334,
+          1.0
+        ]
+      },
+      "hybrid": {
+        "mrr": [
+          0.9166666666666666,
+          0.7777777777777778,
+          1.0
+        ],
+        "hit@1": [
+          0.8888888888888888,
+          0.7222222222222222,
+          1.0
+        ],
+        "hit@4": [
+          0.9444444444444444,
+          0.8333333333333334,
+          1.0
+        ]
+      }
+    },
+    "p_values_mrr": {
+      "hybrid_vs_bm25": 1.0,
+      "hybrid_vs_vector": 0.49445055494450557
+    },
+    "per_question": {
+      "bm25": {
+        "mrr": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.5
+        ],
+        "hit@1": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "hit@4": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0
+        ]
+      },
+      "vector": {
+        "mrr": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.5,
+          0.5,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.5
+        ],
+        "hit@1": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "hit@4": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0
+        ]
+      },
+      "hybrid": {
+        "mrr": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.5
+        ],
+        "hit@1": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "hit@4": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0
+        ]
+      }
+    }
+  },
+  "end_to_end": {
+    "rows": [
+      {
+        "id": "p01",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 1.08,
+        "tokens": 0
+      },
+      {
+        "id": "p02",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.98,
+        "tokens": 0
+      },
+      {
+        "id": "p03",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.81,
+        "tokens": 0
+      },
+      {
+        "id": "p04",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.79,
+        "tokens": 0
+      },
+      {
+        "id": "p05",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.84,
+        "tokens": 0
+      },
+      {
+        "id": "p06",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.82,
+        "tokens": 0
+      },
+      {
+        "id": "p07",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.81,
+        "tokens": 0
+      },
+      {
+        "id": "p08",
+        "expected_route": "policy",
+        "route": "data",
+        "route_ok": 0.0,
+        "keyword_recall": 0.0,
+        "groundedness": 0.0,
+        "latency_ms": 3.47,
+        "tokens": 0
+      },
+      {
+        "id": "p09",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.89,
+        "tokens": 0
+      },
+      {
+        "id": "p10",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.8,
+        "tokens": 0
+      },
+      {
+        "id": "p11",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.84,
+        "tokens": 0
+      },
+      {
+        "id": "p12",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.79,
+        "tokens": 0
+      },
+      {
+        "id": "p13",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.87,
+        "tokens": 0
+      },
+      {
+        "id": "p14",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.81,
+        "tokens": 0
+      },
+      {
+        "id": "p15",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.84,
+        "tokens": 0
+      },
+      {
+        "id": "p16",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 0.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.81,
+        "tokens": 0
+      },
+      {
+        "id": "d01",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 1.5,
+        "tokens": 0
+      },
+      {
+        "id": "d02",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 0.24,
+        "tokens": 0
+      },
+      {
+        "id": "d03",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 1.29,
+        "tokens": 0
+      },
+      {
+        "id": "d04",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 0.9,
+        "tokens": 0
+      },
+      {
+        "id": "d05",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 1.24,
+        "tokens": 0
+      },
+      {
+        "id": "d06",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 1.23,
+        "tokens": 0
+      },
+      {
+        "id": "d07",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 2.21,
+        "tokens": 0
+      },
+      {
+        "id": "d08",
+        "expected_route": "data",
+        "route": "data",
+        "route_ok": 1.0,
+        "sql_exec_match": 1.0,
+        "latency_ms": 0.19,
+        "tokens": 0
+      },
+      {
+        "id": "h01",
+        "expected_route": "hybrid",
+        "route": "hybrid",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 0.5,
+        "sql_exec_match": 1.0,
+        "latency_ms": 1.3,
+        "tokens": 0
+      },
+      {
+        "id": "h02",
+        "expected_route": "hybrid",
+        "route": "hybrid",
+        "route_ok": 1.0,
+        "keyword_recall": 1.0,
+        "groundedness": 0.6666666666666666,
+        "sql_exec_match": 1.0,
+        "latency_ms": 2.02,
+        "tokens": 0
+      }
+    ],
+    "metrics": {
+      "route_ok": {
+        "n": 26,
+        "ci": [
+          0.9615384615384616,
+          0.8846153846153846,
+          1.0
+        ]
+      },
+      "keyword_recall": {
+        "n": 18,
+        "ci": [
+          0.8888888888888888,
+          0.7222222222222222,
+          1.0
+        ]
+      },
+      "groundedness": {
+        "n": 18,
+        "ci": [
+          0.8981481481481483,
+          0.7592592592592592,
+          1.0
+        ]
+      },
+      "sql_exec_match": {
+        "n": 10,
+        "ci": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "latency_ms": {
+      "p50": 0.855,
+      "p95": 2.1625
+    },
+    "failures": [
+      {
+        "id": "p08",
+        "expected_route": "policy",
+        "route": "data",
+        "route_ok": 0.0,
+        "keyword_recall": 0.0,
+        "groundedness": 0.0,
+        "latency_ms": 3.47,
+        "tokens": 0
+      },
+      {
+        "id": "p16",
+        "expected_route": "policy",
+        "route": "policy",
+        "route_ok": 1.0,
+        "keyword_recall": 0.0,
+        "groundedness": 1.0,
+        "latency_ms": 0.81,
+        "tokens": 0
+      }
+    ]
+  }
+}
