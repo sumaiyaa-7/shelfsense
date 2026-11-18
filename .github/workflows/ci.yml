@@ -1,0 +1,29 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test-and-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m shelfsense.seed_db
+      - run: pytest -q
+      - name: Run eval suite (offline mode)
+        run: python -m shelfsense.evals.run_evals
+      - name: Quality gate
+        run: |
+          python -c "
+          import json, sys
+          m = json.load(open('reports/eval_results.json'))['end_to_end']['metrics']
+          gates = {'route_ok': 0.90, 'sql_exec_match': 0.95, 'keyword_recall': 0.80}
+          bad = {k: m[k]['ci'][0] for k, t in gates.items() if m[k]['ci'][0] < t}
+          print('metrics:', {k: round(m[k]['ci'][0], 3) for k in gates})
+          sys.exit(f'quality gate failed: {bad}' if bad else 0)
+          "
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eval-report
+          path: reports/
