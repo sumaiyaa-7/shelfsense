@@ -10,7 +10,7 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: python -m shelfsense.seed_db
-      - run: pytest -q
+      - run: python -m pytest -q
       - name: Run eval suite (offline mode)
         run: python -m shelfsense.evals.run_evals
       - name: Quality gate
