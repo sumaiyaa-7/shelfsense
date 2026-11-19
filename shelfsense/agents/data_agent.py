@@ -97,7 +97,10 @@ class DataAgent:
         joins = "FROM sales x JOIN products p ON p.product_id = x.product_id JOIN stores s ON s.store_id = x.store_id"
         w = f"WHERE {' AND '.join(where)}" if where else ""
 
-        if re.search(r"reorder|low stock|running low|\brestock\b", q):  # not "restocking fee"
+        if re.search(
+            r"reorder|\blow (on |in )?(stock|inventory)|running low|stock is low|out of stock|\brestock\b|need(s)? restocking",
+            q,
+        ):  # "restock" alone, so "restocking fee" doesn't match
             city_where = [c for c in where if c.startswith("s.city")]
             city_params = [p for p, c in zip(params, where) if c.startswith("s.city")]
             cw = " AND " + " AND ".join(city_where) if city_where else ""
