@@ -52,3 +52,11 @@ def test_regressions_found_by_evals(copilot):
     assert copilot.ask("How many units of furniture did Boston sell in March?").sql is not None
     # "which category" is a data question
     assert copilot.ask("Which category brings in the most money in Edison?").route == "data"
+
+
+def test_low_stock_phrasings(copilot):
+    # found by a user on the live demo: "low on stock" wasn't recognized
+    for q in ["Which products are low on stock in Boston?", "which products are low in stock in boston?",
+              "What is out of stock in Edison?", "Show low inventory in Charlotte"]:
+        r = copilot.ask(q)
+        assert r.route == "data" and r.sql and "reorder_point" in r.sql, q
